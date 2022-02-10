@@ -74,8 +74,8 @@
 
         </div>
         <div class="content markdown">
-            <p><img src="https://github.com/FOWnglp/FOWnglp.github.io/blob/master/img/%E7%AC%AC01-02%E8%8A%82%EF%BC%9A%E6%AF%94%E7%89%B9%E5%B8%81%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/%E5%9B%BE%E7%89%871.png" alt="比特币"></p>
-<p><img src="https://github.com/FOWnglp/FOWnglp.github.io/blob/master/img/%E7%AC%AC01-02%E8%8A%82%EF%BC%9A%E6%AF%94%E7%89%B9%E5%B8%81%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/%E5%9B%BE%E7%89%872.png" alt="以太坊"></p>
+            <p><img src="https://raw.githubusercontent.com/FOWnglp/FOWnglp.github.io/master/img/%E7%AC%AC01-02%E8%8A%82%EF%BC%9A%E6%AF%94%E7%89%B9%E5%B8%81%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/%E5%9B%BE%E7%89%871.png" alt="比特币"></p>
+<p><img src="https://raw.githubusercontent.com/FOWnglp/FOWnglp.github.io/master/img/%E7%AC%AC01-02%E8%8A%82%EF%BC%9A%E6%AF%94%E7%89%B9%E5%B8%81%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/%E5%9B%BE%E7%89%872.png" alt="以太坊"></p>
 <p>比特币被称为<strong>加密货币crypto-currency</strong><br>区块链上内容都是公开的，包括区块的地址，转账的金额。<br>比特币主要用到了密码学中的两个功能:1.<strong>哈希</strong>2.<strong>签名</strong></p>
 <h4 id="1-密码学中用到的哈希函数被称为cryptographic-hash-function"><a href="#1-密码学中用到的哈希函数被称为cryptographic-hash-function" class="headerlink" title="1.密码学中用到的哈希函数被称为cryptographic hash function:"></a>1.密码学中用到的哈希函数被称为<strong>cryptographic hash function</strong>:</h4><p>它有两个重要的性质:</p>
 <h5 id="①collision-这里指哈希碰撞-resistance"><a href="#①collision-这里指哈希碰撞-resistance" class="headerlink" title="①collision(这里指哈希碰撞) resistance :"></a>①<strong>collision</strong>(这里指哈希碰撞) <strong>resistance</strong> :</h5><p>例如x≠y， H(x)&#x3D;H(y) 两个不同的输入，输出却是相等的，这就称哈希碰撞。它是不可避免的，因为输入空间总大于输出空间（远大于）。<br>Collision free ~ 给出x，很难找到y，除非蛮力求解(brute-force)。<br>该性质的作用:对一个message求digest<br>比如message取m m的哈希值是H(m)&#x3D;digest 如果有人想篡改m值而H(m)不变，则无法做到。实例：上传软件版本定m，求哈希值判断是否被篡改。<br>哈希碰撞无法人为制造，无法从数学&#x2F;理论上验证，是根据长期实践经验得来的。<br>MD5已经可以被人为制造碰撞了 </p>
