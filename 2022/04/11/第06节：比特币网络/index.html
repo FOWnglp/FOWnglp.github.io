@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>第05节：比特币系统的实现 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="比特币工作在应用层(application layer:Bitcoin block chain)，它的底层是一个网络层(network layer:P2P overlay network)。
+比特币,"> 
+    <meta name="author" content="FOW"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="第05节：比特币系统的实现 - Hexo"/>
+    <meta name="twitter:description" content="比特币工作在应用层(application layer:Bitcoin block chain)，它的底层是一个网络层(network layer:P2P overlay network)。
+比特币,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="第05节：比特币系统的实现 - Hexo"/>
+    <meta property="og:description" content="比特币工作在应用层(application layer:Bitcoin block chain)，它的底层是一个网络层(network layer:P2P overlay network)。
+比特币,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">第05节：比特币系统的实现</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">第05节：比特币系统的实现</h1>
+        <div class="stuff">
+            <span>四月 11, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80/" rel="tag">区块链基础</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>比特币工作在应用层(application layer:Bitcoin block chain)，<br>它的底层是一个网络层(network layer:P2P overlay network)。</p>
+<p>比特币的P2P网络是非常简单的，所有节点都是对等的。不像有的P2P网络有所谓的超级节点、主节点。(super node &#x2F; master node)</p>
+<p>要加入P2P网络首先得知道至少有一个种子节点(seed node)，然后你要跟种子节点联系，它会告诉你它所知道的网络中的其他节点，节点之间是通过TCP通信的，这样有利于穿透防火墙。当你要离开时不需要做任何操作，不用通知其他节点，退出应用程序就行了。别的节点没有听到你的信息，过一段时间之后就会把你删掉。</p>
+<h5 id="比特币网络的设计原则是-简单、鲁棒，而不是高效。"><a href="#比特币网络的设计原则是-简单、鲁棒，而不是高效。" class="headerlink" title="比特币网络的设计原则是:简单、鲁棒，而不是高效。"></a>比特币网络的设计原则是:简单、鲁棒，而不是高效。</h5><p>每个节点维护一个邻居节点的集合，消息传播在网络中采取flooding的方式。节点第一次听到某个消息的时候，把它传播给其他所有的邻居节点，同时记录一下这个消息我已经收到过了。下次再收到这个消息的时候，就不用转发给邻居节点了。</p>
+<p>邻居节点的选取是随机的，没有考虑底层的拓扑结构。比如一个在加利福尼亚的节点，它选的邻居节点可能是在阿根廷的。这样设计的好处是增强鲁棒性，它没有考虑底层的拓扑结构，但是牺牲的是效率，你向身边的人转账和向美国的人转账速度是差不多的。</p>
+<p>比特币系统中，每个节点要维护一个等待上链的交易的集合。假如一个集合的交易都是等待写入区块链里的，那么第一次听到某个交易的时候，把这个交易加入这个集合，并且转发这个交易给节点，以后再收到这个交易就不用转发了，这样避免交易会在网络上无线的传播下去。转发的前提是该交易是合法的。</p>
+<p>这里有冲突的情况，有可能你会有两个有冲突的交易，差不多同时被广播到网络上。比如说A→B和A→C，这两个如果同时广播在网络上，那么每个节点根据在网络中的位置的不同，收到两个交易的先后顺序不同。</p>
+<p>比如一个人先收到第一个交易，就写入到集合里，再收到第二个交易的时候就不会写入集合，因为跟上一个交易有冲突，就认定是非法的。假设这两个交易花的是同一个币，那么写入集合的交易就会被删掉。</p>
+<p>比如说节点听到一个新发布的区块，里面包含了A→B的交易，那么这个交易就可以删掉了，因为已经写入到了区块链里。如果节点又听到了A→C的交易，该怎么办?这时候也要把A→B删掉。因为A→C如果已经被写入到了区块里，那么A→B就变成了非法交易，就变成了double spending，这就是冲突的情况。可能某个先收到A→C的节点，抢先挖到了矿，发布了区块。</p>
+<p>新发布的区块在网络上的传播有很多方式，跟新发布的交易是类似的。每个节点除了要检查区块的内容合法性之外，还要查它是不是在最长合法链里。越是大的区块，在网络上传播速度越慢。</p>
+<p>比特币协议对区块的大小有1M字节的限制。比特币系统采用的传播方式是非常耗费带宽的，带宽是瓶颈。按1M的区块大小限制来算的话，一个新发布的区块有可能需要几十秒，才能传输到网络大部分境地，这已经是挺长时间了，所以这个限制值不算小。</p>
+<p>还需要注意的一点:我们讲的比特币网络的传播属于best effort 。一个交易发布到比特币网络上，不一定所以的节点都能收到，而且不同的节点收到这个交易的顺序也不一定是一样的。网络传播存在延迟，而且这个延迟有的时候可能会很长，有的节点也不一定按照比特币协议的要求进行转发。</p>
+<p>可能有的该转发的不转发，导致某些合法的交易收不到，也有的节点可能转发一些不该转发发的消息，比如说有些不合法的交易也被转发了。这就是我们面临的一个实际问题。</p>
+<h5 id="线上交易平台无法解决线下的问题。"><a href="#线上交易平台无法解决线下的问题。" class="headerlink" title="线上交易平台无法解决线下的问题。"></a>线上交易平台无法解决线下的问题。</h5><p>例如付款后，商家不给你发货，去中心化的方式使得用户无法进行投诉，这种情况只能借助销售平台进行把控，失去信誉的商家大家就不会来买东西了。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
