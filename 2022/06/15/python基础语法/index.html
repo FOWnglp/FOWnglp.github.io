@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>python基础语法 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="Python基础数据类型整数
+二进制数只使用数字0、1表示，在Python中，二进制整数使用前缀0b表示，比如：0b0110，0b1100。
+十六进制数除了0~9十个数字以外，还使用a、b、c、d、,"> 
+    <meta name="author" content="FOW"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="python基础语法 - Hexo"/>
+    <meta name="twitter:description" content="Python基础数据类型整数
+二进制数只使用数字0、1表示，在Python中，二进制整数使用前缀0b表示，比如：0b0110，0b1100。
+十六进制数除了0~9十个数字以外，还使用a、b、c、d、,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="python基础语法 - Hexo"/>
+    <meta property="og:description" content="Python基础数据类型整数
+二进制数只使用数字0、1表示，在Python中，二进制整数使用前缀0b表示，比如：0b0110，0b1100。
+十六进制数除了0~9十个数字以外，还使用a、b、c、d、,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">python基础语法</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">python基础语法</h1>
+        <div class="stuff">
+            <span>六月 15, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/python/" rel="tag">python</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h3 id="Python基础数据类型"><a href="#Python基础数据类型" class="headerlink" title="Python基础数据类型"></a><strong>Python基础数据类型</strong></h3><p><strong>整数</strong></p>
+<p>二进制数只使用数字0、1表示，在Python中，二进制整数使用前缀<strong>0b</strong>表示，比如：0b0110，0b1100。</p>
+<p>十六进制数除了0~9十个数字以外，还使用a、b、c、d、e、f，在Python中，十六进制使用前缀<strong>0x</strong>，比如：0x12ef，0xde2431af。</p>
+<p><strong>浮点数</strong></p>
+<p>为什么小数在计算机领域被称为浮点数呢？这是因为按照科学记数法表示时，一个浮点数的小数点位置是可变的（浮动的），比如，1.23x10^9和12.3x10^8是相等的，因此称为浮点数。</p>
+<p>浮点数可以用数学写法，如1.23，3.14，-9.01。但是对于很大或很小的浮点数，就必须用科学计数法表示，在Python中，把10用e替代，比如：1.23x10^9就是1.23e9，或者12.3e8，0.000012可以写成1.2e-5</p>
+<p>这里有必要提醒一点就是，整数和浮点数在计算机内部存储的方式是不同的，整数运算永远是精确的，而浮点数运算则可能会有四舍五入的误差，如何检验，可以在Python终端中输入以下内容0.1 + 0.2，看看可以得到你期望的结果0.3吗？真实结果可能让你失望了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;&gt;&gt;0.1+0.2</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;0.30000000000000004</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>字符串</strong></p>
+<p>在Python中，字符串是以’’或””括起来的任意文本，比如’abc’，”xyz”等等。</p>
+<p><strong>布尔值</strong></p>
+<p>一个布尔值只有True、False两种值，要么是True，要么是False，在Python中，可以直接用True、False表示布尔值（请注意大小写，不需要使用字符串符号括起来）</p>
+<p><strong>空值</strong></p>
+<p>空值是Python里一个特殊的值，用<strong>None</strong>表示。</p>
+<h3 id="Python定义变量的方法"><a href="#Python定义变量的方法" class="headerlink" title="Python定义变量的方法"></a>Python定义变量的方法</h3><ol>
+<li>变量名由大小写英文字母、数字和下划线_组成</li>
+<li>变量不能用数字开头</li>
+<li>变量尽量不要和Python关键字重合（比如前面学习过的：and、or、not，否则可能导致Python原有关键字发挥不出作用）</li>
+</ol>
+<p>以下这些变量的定义都是合法的。</p>
+<p>num, count, _none, min_value<br>他们都满足上面的三个条件。</p>
+<p>以下这些变量的定义都是不合法的。</p>
+<p>1num, 666, 1_cd, and</p>
+<p><strong>定义变量</strong></p>
+<p>在Python里面，一个变量可以先后存储多种不同类型的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = 1 # 这个时候a存储的是整数类型</span><br><span class="line">print(a)</span><br><span class="line">a = &#x27;ABC&#x27; # 这个时候a存储的是字符串类型</span><br><span class="line">print(a)</span><br></pre></td></tr></table></figure>
+
+<p>这是Python这类语言特有的特性，我们称之为<strong>动态语言</strong>，与之对应的是静态语言，Python、Javascript等等都是动态语言，Java、C、C++等等属于静态语言。</p>
+<h3 id="Python的整数与浮点数"><a href="#Python的整数与浮点数" class="headerlink" title="Python的整数与浮点数"></a>Python的整数与浮点数</h3><p><strong>四则运算</strong></p>
+<p>整数、浮点数可以直接进行四则运算。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 加法</span><br><span class="line">num1 = 10</span><br><span class="line">num2 = 0.5</span><br><span class="line">result = num1 + num2</span><br><span class="line">print(result) # ==&gt; 10.5</span><br><span class="line"># 减法</span><br><span class="line">result = num1 - num2</span><br><span class="line">print(result) # ==&gt; 9.5</span><br><span class="line"># 乘法</span><br><span class="line">result = num1 * num2</span><br><span class="line">print(result) # ==&gt; 5.0</span><br><span class="line"># 除法</span><br><span class="line">result = num1 / num2</span><br><span class="line">print(result) # ==&gt;20.0</span><br></pre></td></tr></table></figure>
+<p>从上面可以发现一个规律，整数和浮点数运算后 ，得到的结果不管小数点后是否有值，结果都变成浮点数了，这是合理的，浮点数可以表达整数的结果，但是整数不能表达浮点数的结果。</p>
+<p><strong>注意：在Python2使用除法可能和Python3得到不一样的结果</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># python2</span><br><span class="line">num1 = 10</span><br><span class="line">num2 = 3</span><br><span class="line">result = num1 / num2</span><br><span class="line">print(result) # ==&gt; 3</span><br><span class="line"># python3</span><br><span class="line">num1 = 10</span><br><span class="line">num2 = 3</span><br><span class="line">result = num1 / num2</span><br><span class="line">print(result) # ==&gt; 3.3333333333333335</span><br></pre></td></tr></table></figure>
+<p>可以看到在python2，得到的是一个整数的结果，这是因为除数和被除数都是整数时，得到的结果也默认保存为整数了，这是非常不科学的，因此在python3，改进了这一点。</p>
+<p><strong>地板除</strong></p>
+<p>Python除了普通除法以外，还有一个特殊的除法被称为地板除，对于地板除，得到的结果会忽略纯小数的部分，得到整数的部分，地板除使用&#x2F;&#x2F;进行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">10//4 # ==&gt; 2</span><br><span class="line">10//2.5 # ==&gt; 4.0</span><br><span class="line">10//3 # ==&gt; 3</span><br></pre></td></tr></table></figure>
+
+<p><strong>小数点位数</strong></p>
+<p>使用Python计算小数的时候，经常需要保留小数点后若干位，可以使用round()函数来处理，这里先了解round的调用方式，使用两个参数，第一个是需要保留小数点位数的数值，第二个是保留的位数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">num = 10 / 3</span><br><span class="line">print(num) # ==&gt; 3.3333333333333335</span><br><span class="line"># 使用round保留两位小数</span><br><span class="line">round(num, 2) # ==&gt; 3.33</span><br></pre></td></tr></table></figure>
+<h3 id="Python的布尔类型"><a href="#Python的布尔类型" class="headerlink" title="Python的布尔类型"></a>Python的布尔类型</h3><p><strong>需要注意的是，not计算的优先级是高于and和or的。</strong></p>
+<p><strong>短路计算</strong></p>
+<ol>
+<li>在计算a and b时，如果 a 是 False，则根据与运算法则，整个结果必定为 False，因此返回 a；如果 a 是 True，则整个计算结果必定取决与 b，因此返回 b。</li>
+<li>在计算a or b时，如果 a 是 True，则根据或运算法则，整个计算结果必定为 True，因此返回 a；如果 a 是 False，则整个计算结果必定取决于 b，因此返回 b。</li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="http://domain.com/awesome.mp3">
+            </audio>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
