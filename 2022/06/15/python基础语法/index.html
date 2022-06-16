@@ -120,7 +120,41 @@
 <li>在计算a and b时，如果 a 是 False，则根据与运算法则，整个结果必定为 False，因此返回 a；如果 a 是 True，则整个计算结果必定取决与 b，因此返回 b。</li>
 <li>在计算a or b时，如果 a 是 True，则根据或运算法则，整个计算结果必定为 True，因此返回 a；如果 a 是 False，则整个计算结果必定取决于 b，因此返回 b。</li>
 </ol>
+<p><img src="https://raw.githubusercontent.com/FOWnglp/FOWnglp.github.io/master/img/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A61.png" alt="逻辑运算符"></p>
+<p><img src="https://raw.githubusercontent.com/FOWnglp/FOWnglp.github.io/master/img/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A62.png" alt="逻辑运算符2"><br><a target="_blank" rel="noopener" href="https://docs.python.org/3/reference/expressions.html#boolean-operations"><strong>参考文献</strong></a> <a target="_blank" rel="noopener" href="https://docs.python.org/3/reference/expressions.html#boolean-operations">https://docs.python.org/3/reference/expressions.html#boolean-operations</a></p>
+<h3 id="python字符串"><a href="#python字符串" class="headerlink" title="python字符串"></a>python字符串</h3><p>Python字符串用<code>\</code>进行转义</p>
+<p>要表示字符串Bob said “I’m OK”<br>由于’和”会引起歧义，因此，我们在它前面插入一个\表示这是一个普通字符，不代表字符串的起始，因此，这个字符串又可以表示为</p>
+<p><code>&#39;Bob said \&quot;I\&#39;m OK\&quot;.&#39;</code></p>
+<p>注意：转义字符 \不计入字符串的内容中。</p>
+<p>常用的转义字符还有：</p>
+<ul>
+<li>\n表示换行</li>
+<li>\t 表示一个制表符</li>
+<li>\表示 \ 字符本身</li>
+</ul>
+<p><strong>Python中raw字符串与多行字符串</strong></p>
+<p>如果一个字符串包含很多需要转义的字符，对每一个字符都进行转义会很麻烦。为了避免这种情况，我们可以在字符串前面加个前缀r，表示这是一个 raw 字符串，里面的字符就不需要转义了。例如：</p>
+<p><code>r&#39;\(~_~)/ \(~_~)/&#39;</code></p>
+<p>但是<code>r&#39;...&#39;</code>表示法不能表示多行字符串，也不能表示包含’和 “的字符串。</p>
+<p>如果要表示多行字符串，可以用<code>&#39;&#39;&#39;...&#39;&#39;&#39;</code>表示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x27;&#x27;&#x27;Line 1</span><br><span class="line">Line 2</span><br><span class="line">Line 3&#x27;&#x27;&#x27;</span><br></pre></td></tr></table></figure>
 
+<p>上面这个字符串的表示方法和下面的是完全一样的：</p>
+<p><code>&#39;Line 1\nLine 2\nLine 3&#39;</code></p>
+<p>还可以在多行字符串前面添加r，把这个多行字符串也变成一个raw字符串：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">r&#x27;&#x27;&#x27;Python is created by &quot;Guido&quot;.</span><br><span class="line">It is free and easy to learn.</span><br><span class="line">Let&#x27;s start learn Python in imooc!&#x27;&#x27;&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Python的字符串format"><a href="#Python的字符串format" class="headerlink" title="Python的字符串format"></a>Python的字符串format</h3><p>字符串是Python程序重要的数据类型，到目前为止，我们输出的字符串的内容都是固定的，但有时候通过字符串输出的内容不是固定的，这个时候需要使用format来处理字符串，输出不固定的内容。</p>
+<p>字符串format由两个部分组成，字符串模板和模板数据内容组成，通过大括号{}，就可以把模板数据内容嵌到字符串模板对应的位置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 字符串模板</span><br><span class="line">template = &#x27;Hello &#123;&#125;&#x27;</span><br><span class="line"># 模板数据内容</span><br><span class="line">world = &#x27;World&#x27;</span><br><span class="line">result = template.format(world)</span><br><span class="line">print(result) # ==&gt; Hello World</span><br></pre></td></tr></table></figure>
+<p>如果模板中{}比较多，则容易错乱，那么在format的时候也可以指定模板数据内容的顺序。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 指定顺序</span><br><span class="line">template = &#x27;Hello &#123;0&#125;, Hello &#123;1&#125;, Hello &#123;2&#125;, Hello &#123;3&#125;.&#x27;</span><br><span class="line">result = template.format(&#x27;World&#x27;, &#x27;China&#x27;, &#x27;Beijing&#x27;, &#x27;imooc&#x27;)</span><br><span class="line">print(result) # ==&gt; Hello World, Hello China, Hello Beijing, Hello imooc.</span><br><span class="line"># 调整顺序</span><br><span class="line">template = &#x27;Hello &#123;3&#125;, Hello &#123;2&#125;, Hello &#123;1&#125;, Hello &#123;0&#125;.&#x27;</span><br><span class="line">result = template.format(&#x27;World&#x27;, &#x27;China&#x27;, &#x27;Beijing&#x27;, &#x27;imooc&#x27;)</span><br><span class="line">print(result) # ==&gt; Hello imooc, Hello Beijing, Hello China, Hello World.</span><br></pre></td></tr></table></figure>
+<p>除了使用顺序，还可以指定对应的名字，使得在format过程更加清晰。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 指定&#123;&#125;的名字w,c,b,i</span><br><span class="line">template = &#x27;Hello &#123;w&#125;, Hello &#123;c&#125;, Hello &#123;b&#125;, Hello &#123;i&#125;.&#x27;</span><br><span class="line">world = &#x27;World&#x27;</span><br><span class="line">china = &#x27;China&#x27;</span><br><span class="line">beijing = &#x27;Beijing&#x27;</span><br><span class="line">imooc = &#x27;imooc&#x27;</span><br><span class="line"># 指定名字对应的模板数据内容</span><br><span class="line">result = template.format(w = world, c = china, b = beijing, i = imooc)</span><br><span class="line">print(result) # ==&gt; Hello World, Hello China, Hello Beijing, Hello imooc.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Python的字符串切片</strong></p>
+<p>有时候，我们会想获取字符串的一部分（子串），这个时候我们采取切片的方式获取，切片需要在中括号[]中填入两个数字，中间用冒号分开，表示子串的开始位置和结束位置，并且这是半闭半开区间，不包括最后的位置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = &#x27;ABCDEFGHIJK&#x27;</span><br><span class="line">abcd = s[0:4] # 取字符串s中的第一个字符到第五个字符，不包括第五个字符</span><br><span class="line">print(abcd) # ==&gt; ABCD</span><br><span class="line">cdef = s[2:6] # 取字符串s中的第三个字符到第七个字符，不包括第七个字符</span><br><span class="line">print(cdef) # ==&gt; CDEF</span><br></pre></td></tr></table></figure>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="http://domain.com/awesome.mp3">
