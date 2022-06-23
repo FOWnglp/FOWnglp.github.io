@@ -179,6 +179,52 @@
 <p>对于list，我们可以直接把list的内容打印出来。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">L = [&#x27;Alice&#x27;, 66, &#x27;Bob&#x27;, True, &#x27;False&#x27;, 100]</span><br><span class="line">print(L)</span><br></pre></td></tr></table></figure>
 
+<h3 id="Python按顺序访问list"><a href="#Python按顺序访问list" class="headerlink" title="Python按顺序访问list"></a>Python按顺序访问list</h3><p>列表是有序的，因此我们可以按顺序访问列表中的元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">L = [&#x27;Alice&#x27;, 66, &#x27;Bob&#x27;, True, &#x27;False&#x27;, 100]</span><br><span class="line">for item in L:</span><br><span class="line">    print(item)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>回想一下，在前面，我们学习过字符串，这里使用for循环访问列表中的每一个元素和使用for循环访问字符串中的每一个字符是非常类似的。</p>
+<p>事实上字符串也可以看作是一种特殊的列表，它只能按顺序存放多个字符。通过for循环访问列表每一个元素的方式，我们称为迭代。<br>而对于一个空的列表，使用for循环访问，将不会打印任何东西。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">L = []</span><br><span class="line">for item in L:</span><br><span class="line">    print(item)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Python按索引访问list"><a href="#Python按索引访问list" class="headerlink" title="Python按索引访问list"></a>Python按索引访问list</h3><p>由于列表list是一个有序的容器，所以在list里面，每一个元素都有一个唯一的位置，我们称之为索引(index)，这和字符串是类似的，因此我们也可以通过位置的方式获取list中的元素，回顾一下前面学习的，我们通过中括号[]来按位置访问对应的元素。</p>
+<p><strong>注意，这里要注意区分，列表的定义也是通过中括号[]来定义的，但这和通过索引访问列表里面的元素并不冲突</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">names = [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;David&#x27;, &#x27;Ellena&#x27;]</span><br><span class="line">print(names[0])</span><br><span class="line">print(names[1])</span><br><span class="line">print(names[2])</span><br><span class="line">print(names[3])</span><br></pre></td></tr></table></figure>
+<p>由于names只有四个元素，所以我们最多只能通过索引3访问到最后一个元素。试想一下，如果我们print(names[4])，会怎么样？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">names = [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;David&#x27;, &#x27;Ellena&#x27;]</span><br><span class="line">print(names[4])</span><br></pre></td></tr></table></figure>
+<p>事实上，这会引起Python运行的错误，提示索引访问超出范围。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">IndexError: list index out of range</span><br></pre></td></tr></table></figure>
+<p>因此，我们在使用索引的方式访问列表时，一定要特别注意不要越界。<br>同时，列表和字符串一样，也支持切片，通过切片的方式，获取到列表的子列表。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">names = [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;David&#x27;, &#x27;Ellena&#x27;]</span><br><span class="line">sub_names = names[0:2]</span><br><span class="line">print(sub_names)</span><br></pre></td></tr></table></figure>
+<p>这里需要注意一下，如果我们越界切片的话，不会出现Python运行错误，但是按照这样的下标去切片，获取不到任何元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">names = [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;David&#x27;, &#x27;Ellena&#x27;]</span><br><span class="line">sub_names = names[5:10]</span><br><span class="line">print(sub_names) # ==&gt; []</span><br></pre></td></tr></table></figure>
+<h3 id="Python倒序访问list"><a href="#Python倒序访问list" class="headerlink" title="Python倒序访问list"></a>Python倒序访问list</h3><p>Python的列表，除了支持正向顺序索引获取列表中的每一个元素以外，也支持倒序访问list中的每一个元素。</p>
+<p><code>names = [&#39;Alice&#39;, &#39;Bob&#39;, &#39;David&#39;, &#39;Ellena&#39;]</code></p>
+<p>对于names列表，Ellena的名字排在最后，也就是我们所说的倒数第一个，在Python中，可以使用-1来表示最后一个元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">names = [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;David&#x27;, &#x27;Ellena&#x27;]</span><br><span class="line">print(names[-1]) # ==&gt; Ellena</span><br></pre></td></tr></table></figure>
+<p>同样的道理，我们可以通过-2，打印出David的名字，通过-3，打印出Bob的位置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(names[-2]) # ==&gt; David</span><br><span class="line">print(names[-3]) # ==&gt; Bob</span><br></pre></td></tr></table></figure>
+<p><strong>注意，如果我们使用-5的话，因为不存在倒数第五个名字，因此这也是一种越界，同样会报错。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">names = [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;David&#x27;, &#x27;Ellena&#x27;]</span><br><span class="line">print(names[-5])</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">IndexError: list index out of range</span><br></pre></td></tr></table></figure>
+
+<h3 id="Python向list添加新的元素"><a href="#Python向list添加新的元素" class="headerlink" title="Python向list添加新的元素"></a>Python向list添加新的元素</h3><p>现在班里面有4名同学：</p>
+<blockquote>
+<p>names &#x3D; [‘Alice’, ‘Bob’, ‘David’, ‘Ellena’]</p>
+</blockquote>
+<p>今天，班里转来一名新同学Candy，如何把新同学添加到现有的列表当中呢？</p>
+<p>在Python中，list提供了一系列的方法可以让我们操作list中的元素，其中也包含了添加元素的方法。</p>
+<p><strong>第一个办法是用append()方法，把新同学追加到列表的末尾：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">names = [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;David&#x27;, &#x27;Ellena&#x27;]</span><br><span class="line">names.append(&#x27;Candy&#x27;)</span><br><span class="line">print(names) # ==&gt; [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;David&#x27;, &#x27;Ellena&#x27;, &#x27;Candy&#x27;]</span><br></pre></td></tr></table></figure>
+<p><strong>注意，append()方法总是将元素添加到list的尾部。</strong></p>
+<p>如果上面的列表需要按照首字母排序的话，那么Candy应该是排在第三的位置的，这怎么办呢？</p>
+<p>这就需要使用list的<strong>insert()方法</strong>，insert()方法和append()方法不一样，insert()方法需要两个参数，分别是需要插入的位置，以及需要插入的元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">names = [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;David&#x27;, &#x27;Ellena&#x27;]</span><br><span class="line">names.insert(2, &#x27;Candy&#x27;)</span><br><span class="line">print(names) # ==&gt; [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;Candy&#x27;, &#x27;David&#x27;, &#x27;Ellena&#x27;]</span><br></pre></td></tr></table></figure>
+<p><strong>注意，将Candy插入到第三的位置之后，原来的名字，都将自动往后移动一位，这个时候再使用相同的索引获取后面的元素，将会得到不一样的结果</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">names = [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;David&#x27;, &#x27;Ellena&#x27;]</span><br><span class="line">print(names[2]) # ==&gt; David</span><br><span class="line">names.insert(2, &#x27;Candy&#x27;)</span><br><span class="line">print(names[2]) # ==&gt;Candy</span><br></pre></td></tr></table></figure>
+<h3 id="Python从list删除元素"><a href="#Python从list删除元素" class="headerlink" title="Python从list删除元素"></a>Python从list删除元素</h3><p>如果Ellena因为家庭原因需要转学，那么我们如何把Ellena从已有的列表里面删除呢？</p>
+<p>这个时候我们可以使用列表的pop()方法，pop()方法默认删除列表的最后一个元素，并返回。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">L = [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;Candy&#x27;, &#x27;David&#x27;, &#x27;Ellena&#x27;]</span><br><span class="line">name = L.pop()</span><br><span class="line">print(name) # ==&gt; Ellena</span><br><span class="line">print(L) # ==&gt; L = [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;Candy&#x27;, &#x27;David&#x27;]</span><br></pre></td></tr></table></figure>
+<p>对于Ellena，由于Ellena恰好位于列表的最后，所以可以直接使用pop()方法把Ellena从列表的最后删除，假如需要转学的不是Ellena，而是Candy，这个时候应该怎么办呢？</p>
+<p>pop()方法，除了可以删除最后一个元素以外，pop()还可以接收一个参数，指定需要删除的元素的位置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">L = [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;Candy&#x27;, &#x27;David&#x27;, &#x27;Ellena&#x27;]</span><br><span class="line">name = L.pop(2)</span><br><span class="line">print(name) # ==&gt; Candy</span><br><span class="line">print(L) # ==&gt; [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;David&#x27;, &#x27;Ellena&#x27;]</span><br></pre></td></tr></table></figure>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
