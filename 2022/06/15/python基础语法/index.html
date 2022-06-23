@@ -155,6 +155,29 @@
 <p><strong>Python的字符串切片</strong></p>
 <p>有时候，我们会想获取字符串的一部分（子串），这个时候我们采取切片的方式获取，切片需要在中括号[]中填入两个数字，中间用冒号分开，表示子串的开始位置和结束位置，并且这是半闭半开区间，不包括最后的位置。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = &#x27;ABCDEFGHIJK&#x27;</span><br><span class="line">abcd = s[0:4] # 取字符串s中的第一个字符到第五个字符，不包括第五个字符</span><br><span class="line">print(abcd) # ==&gt; ABCD</span><br><span class="line">cdef = s[2:6] # 取字符串s中的第三个字符到第七个字符，不包括第七个字符</span><br><span class="line">print(cdef) # ==&gt; CDEF</span><br></pre></td></tr></table></figure>
+<h3 id="Python之if语句"><a href="#Python之if语句" class="headerlink" title="Python之if语句"></a>Python之if语句</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">score = 59</span><br><span class="line">if score &lt; 60:</span><br><span class="line">    print(&#x27;抱歉，考试不及格&#x27;)</span><br><span class="line"># ==&gt; 抱歉，考试不及格</span><br></pre></td></tr></table></figure>
+
+<p>这里，因为<code>score = 59 &lt; 60</code>，所以if的判断是True，因此就会执行<code>print(&#39;抱歉，考试不及格&#39;)</code>。</p>
+<p>这里有几个需要注意的地方：</p>
+<ol>
+<li>可以看到print(‘抱歉，考试不及格’)这行代码明显比上一行代码缩进了，这是因为这行代码是if判断的一个子分支，因此需要缩进，在Python规范中，一般使用4个空格作为缩进</li>
+<li>在if语句的最后，有一个冒号:，这是条件分支判断的格式，在最后加入冒号:，表示接下来是分支代码块<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">score = 59</span><br><span class="line">if score &lt; 60:</span><br><span class="line">    print(&#x27;抱歉，考试不及格&#x27;)</span><br><span class="line">else:</span><br><span class="line">    print(&#x27;恭喜你，考试及格&#x27;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>这个时候，程序就会根据score的值，走不同的子逻辑分支，同学可以改变score的值试一试。</p>
+<p>在这里，同样需要注意两个地方，第一个是冒号:，在else中，同样需要冒号；其次是缩进，在else的子逻辑分支，同样需要缩进。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">score = 59</span><br><span class="line">if score &lt; 60:</span><br><span class="line">    print(&#x27;抱歉，考试不及格&#x27;)</span><br><span class="line">elif score &gt;= 90:</span><br><span class="line">    print(&#x27;恭喜你，拿到卓越的成绩&#x27;)</span><br><span class="line">elif score &gt;= 80:</span><br><span class="line">    print(&#x27;恭喜你，拿到优秀的成绩&#x27;)</span><br><span class="line">else:</span><br><span class="line">    print(&#x27;恭喜你，考试及格&#x27;)</span><br></pre></td></tr></table></figure>
+<h3 id="Python之for循环"><a href="#Python之for循环" class="headerlink" title="Python之for循环"></a>Python之for循环</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = &#x27;ABCD&#x27;</span><br><span class="line">for ch in s:</span><br><span class="line">    print(ch) # 注意缩进</span><br></pre></td></tr></table></figure>
+<p>在上述代码中，ch是在for循环中定义的，意思是把字符串s中的每一个元素依次赋值给ch，然后再把ch打印出来，直到打印出字符串s的最后一个字符为止。</p>
+<h3 id="什么是容器、什么是list"><a href="#什么是容器、什么是list" class="headerlink" title="什么是容器、什么是list"></a>什么是容器、什么是list</h3><h4 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h4><p>生活中，容器指的是可以容纳物品的收纳器，在程序中，容器是一种可以把多个元素放在一起的数据结构，容器中的元素可以逐个地迭代获取，可以用in, not in等关键字判断某个元素是否包含在容器中。</p>
+<p>在Python中，包括列表(list)、元组(tuple)、字典(dict)、集合(set)等，他们都可以放入多个元素，因此都可以算作是容器，这些容器是Python编程中非常重要的数据结构，我们接下来重点学习这些数据结构。</p>
+<h4 id="list"><a href="#list" class="headerlink" title="list"></a>list</h4><p>列表(list)是一种有序的容器，放入list中的元素，将会按照一定顺序排列。构造list的方法非常简单，使用中括号[]把需要放在容器里面的元素括起来，就定义了一个列表。<br>比如列出所有同学们的成绩：</p>
+<p><code>scores = [45, 60, 75, 86, 49, 100]</code></p>
+<p>列出所有同学们的名字：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">names = [&#x27;Alice&#x27;, &#x27;Bob&#x27;, &#x27;David&#x27;, &#x27;Ellena&#x27;] </span><br><span class="line"># 注意，字符串元素仍需要引号</span><br></pre></td></tr></table></figure>
+<p>正如我们看到的，list可以放入数字、字符串等数据类型，list不对放入其中的类型进行判断，也就是说，list可以同时放入任意类型的数据，这是Python这门语言决定的，因为Python是动态语言。</p>
+<p><code>L = [&#39;Alice&#39;, 66, &#39;Bob&#39;, True, &#39;False&#39;, 100]</code></p>
+<p>对于list，我们可以直接把list的内容打印出来。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">L = [&#x27;Alice&#x27;, 66, &#x27;Bob&#x27;, True, &#x27;False&#x27;, 100]</span><br><span class="line">print(L)</span><br></pre></td></tr></table></figure>
 
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
