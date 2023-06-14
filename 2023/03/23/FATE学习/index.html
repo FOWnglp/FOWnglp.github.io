@@ -10,7 +10,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="差分隐私引入博客介绍https://blog.csdn.net/watson2017/article/details/121653356知乎简介https://zhuanlan.zhihu.com/,"> 
+    <meta name="description" content="Hetero-NN Quick Start从二分类例子了解书写FATE代码
+12345678910111213141516171819202122232425262728from pipeline.,"> 
     <meta name="author" content="FOW"> 
     <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -19,7 +20,8 @@
     
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:title" content="FATE学习 - Hexo"/>
-    <meta name="twitter:description" content="差分隐私引入博客介绍https://blog.csdn.net/watson2017/article/details/121653356知乎简介https://zhuanlan.zhihu.com/,"/>
+    <meta name="twitter:description" content="Hetero-NN Quick Start从二分类例子了解书写FATE代码
+12345678910111213141516171819202122232425262728from pipeline.,"/>
     
     
     
@@ -27,7 +29,8 @@
     <meta property="og:site_name" content="Hexo"/>
     <meta property="og:type" content="object"/>
     <meta property="og:title" content="FATE学习 - Hexo"/>
-    <meta property="og:description" content="差分隐私引入博客介绍https://blog.csdn.net/watson2017/article/details/121653356知乎简介https://zhuanlan.zhihu.com/,"/>
+    <meta property="og:description" content="Hetero-NN Quick Start从二分类例子了解书写FATE代码
+12345678910111213141516171819202122232425262728from pipeline.,"/>
     
 <link rel="stylesheet" href="/css/diaspora.css">
 
@@ -65,7 +68,10 @@
 
         </div>
         <div class="content markdown">
-            <h2 id="差分隐私"><a href="#差分隐私" class="headerlink" title="差分隐私"></a>差分隐私</h2><h4 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h4><p>博客介绍<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/watson2017/article/details/121653356">https://blog.csdn.net/watson2017/article/details/121653356</a><br>知乎简介<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/139114240?utm_source=wechat_session">https://zhuanlan.zhihu.com/p/139114240?utm_source=wechat_session</a><br>What is Differential Privacy: definition, mechanisms, and examples<br><a target="_blank" rel="noopener" href="https://www.statice.ai/post/what-is-differential-privacy-definition-mechanisms-examples">https://www.statice.ai/post/what-is-differential-privacy-definition-mechanisms-examples</a><br>百科<br><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81/22415732?fr=aladdin">https://baike.baidu.com/item/差分隐私/22415732?fr=aladdin</a></p>
+            <h2 id="Hetero-NN-Quick-Start"><a href="#Hetero-NN-Quick-Start" class="headerlink" title="Hetero-NN Quick Start"></a>Hetero-NN Quick Start</h2><p>从二分类例子了解书写FATE代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">from pipeline.backend.pipeline import PipeLine  # pipeline class</span><br><span class="line"></span><br><span class="line"># we have two party: guest, whose data with labels</span><br><span class="line">#                    host, without label</span><br><span class="line"># the dataset is vertically split  垂直分类</span><br><span class="line"></span><br><span class="line">dense_data_guest = &#123;&quot;name&quot;: &quot;breast_hetero_guest&quot;, &quot;namespace&quot;: f&quot;experiment&quot;&#125;</span><br><span class="line">dense_data_host = &#123;&quot;name&quot;: &quot;breast_hetero_host&quot;, &quot;namespace&quot;: f&quot;experiment&quot;&#125;</span><br><span class="line"></span><br><span class="line">guest= 9999</span><br><span class="line">host = 10000</span><br><span class="line"></span><br><span class="line">pipeline_upload = PipeLine().set_initiator(role=&#x27;guest&#x27;, party_id=guest).set_roles(guest=guest, host=host)</span><br><span class="line"></span><br><span class="line">partition = 4</span><br><span class="line"></span><br><span class="line"># 上传一份数据</span><br><span class="line">pipeline_upload.add_upload_data(file=&quot;./examples/data/breast_hetero_guest.csv&quot;,</span><br><span class="line">                                table_name=dense_data_guest[&quot;name&quot;],             # table name</span><br><span class="line">                                namespace=dense_data_guest[&quot;namespace&quot;],         # namespace</span><br><span class="line">                                head=1, partition=partition)               # data info</span><br><span class="line"></span><br><span class="line">pipeline_upload.add_upload_data(file=&quot;./examples/data/breast_hetero_host.csv&quot;,</span><br><span class="line">                                table_name=dense_data_host[&quot;name&quot;],</span><br><span class="line">                                namespace=dense_data_host[&quot;namespace&quot;],</span><br><span class="line">                                head=1, partition=partition)      # data info</span><br><span class="line"></span><br><span class="line">pipeline_upload.upload(drop=1)</span><br></pre></td></tr></table></figure>
+
+<h2 id="差分隐私"><a href="#差分隐私" class="headerlink" title="差分隐私"></a>差分隐私</h2><h4 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h4><p>博客介绍<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/watson2017/article/details/121653356">https://blog.csdn.net/watson2017/article/details/121653356</a><br>知乎简介<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/139114240?utm_source=wechat_session">https://zhuanlan.zhihu.com/p/139114240?utm_source=wechat_session</a><br>What is Differential Privacy: definition, mechanisms, and examples<br><a target="_blank" rel="noopener" href="https://www.statice.ai/post/what-is-differential-privacy-definition-mechanisms-examples">https://www.statice.ai/post/what-is-differential-privacy-definition-mechanisms-examples</a><br>百科<br><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81/22415732?fr=aladdin">https://baike.baidu.com/item/差分隐私/22415732?fr=aladdin</a></p>
 <p>差分隐私提出者dowrk写的《Differential Privacy》<br><a target="_blank" rel="noopener" href="http://people.eecs.berkeley.edu/~raluca/cs261-f15/readings/dwork.pdf">http://people.eecs.berkeley.edu/~raluca/cs261-f15/readings/dwork.pdf</a></p>
 <h4 id="emd-earth-mover’s-distances"><a href="#emd-earth-mover’s-distances" class="headerlink" title="emd(earth mover’s distances)"></a>emd(earth mover’s distances)</h4><p>最初EMD的概念是用于图像检索的。后来因为其各种优点，逐渐用到其他方面的相似度度量，EMD被应用于衡量两个概率分布之间的差异。</p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/145739750">https://zhuanlan.zhihu.com/p/145739750</a></p>
@@ -80,7 +86,18 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 导入 math 包</span><br><span class="line">import math</span><br><span class="line"></span><br><span class="line"># 指定不同的指数</span><br><span class="line">print(math.exp(65))</span><br><span class="line">print(math.exp(-6.89))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>输出结果：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.6948892444103338e+28</span><br><span class="line">0.0010179138409954387</span><br></pre></td></tr></table></figure>
-
+<h2 id="一些相关的基础概念"><a href="#一些相关的基础概念" class="headerlink" title="一些相关的基础概念"></a>一些相关的基础概念</h2><h4 id="超参数"><a href="#超参数" class="headerlink" title="超参数"></a><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/78137628">超参数</a></h4><p>简单来说就是，在机器学习前人为设置的参数（手动调参）</p>
+<p>根据经验设置，与之对应的是模型参数-&gt;通过训练得到的参数数据。</p>
+<p>一些示例</p>
+<ol>
+<li>聚类中类的个数</li>
+<li>话题模型中话题的数量</li>
+<li>模型的学习率</li>
+<li>深层神经网络隐藏层数 </li>
+<li>树的数量或树的深度</li>
+<li>矩阵分解中潜在因素的数量</li>
+<li>k均值聚类中的簇数</li>
+</ol>
 <p><img src="/" alt="图1"></p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
