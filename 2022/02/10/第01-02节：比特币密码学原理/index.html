@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>第01-02节：比特币密码学原理 - Hexo</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="
+
+比特币被称为加密货币crypto-currency区块链上内容都是公开的，包括区块的地址，转账的金额。比特币主要用到了密码学中的两个功能:1.哈希2.签名
+1.密码学中用到的哈希函数被称为cry,"> 
+    <meta name="author" content="FOW"> 
+    <link rel="alternative" href="atom.xml" title="Hexo" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="第01-02节：比特币密码学原理 - Hexo"/>
+    <meta name="twitter:description" content="
+
+比特币被称为加密货币crypto-currency区块链上内容都是公开的，包括区块的地址，转账的金额。比特币主要用到了密码学中的两个功能:1.哈希2.签名
+1.密码学中用到的哈希函数被称为cry,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Hexo"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="第01-02节：比特币密码学原理 - Hexo"/>
+    <meta property="og:description" content="
+
+比特币被称为加密货币crypto-currency区块链上内容都是公开的，包括区块的地址，转账的金额。比特币主要用到了密码学中的两个功能:1.哈希2.签名
+1.密码学中用到的哈希函数被称为cry,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Hexo</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">第01-02节：比特币密码学原理</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">第01-02节：比特币密码学原理</h1>
+        <div class="stuff">
+            <span>二月 10, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80/" rel="tag">区块链基础</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p><img src="https://raw.githubusercontent.com/FOWnglp/FOWnglp.github.io/master/img/%E7%AC%AC01-02%E8%8A%82%EF%BC%9A%E6%AF%94%E7%89%B9%E5%B8%81%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/%E5%9B%BE%E7%89%871.png" alt="比特币"></p>
+<p><img src="https://raw.githubusercontent.com/FOWnglp/FOWnglp.github.io/master/img/%E7%AC%AC01-02%E8%8A%82%EF%BC%9A%E6%AF%94%E7%89%B9%E5%B8%81%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/%E5%9B%BE%E7%89%872.png" alt="以太坊"></p>
+<p>比特币被称为<strong>加密货币crypto-currency</strong><br>区块链上内容都是公开的，包括区块的地址，转账的金额。<br>比特币主要用到了密码学中的两个功能:1.<strong>哈希</strong>2.<strong>签名</strong></p>
+<h4 id="1-密码学中用到的哈希函数被称为cryptographic-hash-function"><a href="#1-密码学中用到的哈希函数被称为cryptographic-hash-function" class="headerlink" title="1.密码学中用到的哈希函数被称为cryptographic hash function:"></a>1.密码学中用到的哈希函数被称为<strong>cryptographic hash function</strong>:</h4><p>它有两个重要的性质:</p>
+<h5 id="①collision-这里指哈希碰撞-resistance"><a href="#①collision-这里指哈希碰撞-resistance" class="headerlink" title="①collision(这里指哈希碰撞) resistance :"></a>①<strong>collision</strong>(这里指哈希碰撞) <strong>resistance</strong> :</h5><p>例如x≠y， H(x)&#x3D;H(y) 两个不同的输入，输出却是相等的，这就称哈希碰撞。它是不可避免的，因为输入空间总大于输出空间（远大于）。<br>Collision free ~ 给出x，很难找到y，除非蛮力求解(brute-force)。<br>该性质的作用:对一个message求digest<br>比如message取m m的哈希值是H(m)&#x3D;digest 如果有人想篡改m值而H(m)不变，则无法做到。实例：上传软件版本定m，求哈希值判断是否被篡改。<br>哈希碰撞无法人为制造，无法从数学&#x2F;理论上验证，是根据长期实践经验得来的。<br>MD5已经可以被人为制造碰撞了 </p>
+<h5 id="②hiding"><a href="#②hiding" class="headerlink" title="②hiding"></a>②<strong>hiding</strong></h5><p>哈希函数的计算过程是单向的，不可逆的。(从H(x)无法推导出x) hiding性质前提是输入空间足够大，分布比较均匀。如果不是足够大，一般在x后面拼接一个随机数，如H(x||nonce)。<br>该性质的作用:和collision resistance （性质1）结合在一起，用来实现digital commitment(又称为digital equivalent of a sealed envelope)<br>把预测结果作为输入x，算出一个哈希值，讲哈希值公布，hiding让人们知道哈希值而不知道预测值，最后再将x公布，因为有collision resistance的性质，预测结果是不可篡改的。（股市预测）</p>
+<p>除了密码学中要求的这两个性质外，比特币中用到的哈希函数还有第三个性质:</p>
+<h5 id="③puzzle-friendly"><a href="#③puzzle-friendly" class="headerlink" title="③puzzle friendly"></a>③<strong>puzzle friendly</strong></h5><p>指哈希值的预算事先是不可预测的。假如哈希值是00…0XX…X（k个0），一样事先无法知道哪个值更容易算出这个结果，还是要一个一个带入。</p>
+<p><strong>比特币挖矿</strong>的过程中实际就是找一个nonce，nonce跟区块的块头里的其他信息合一起作为输入，得出的哈希值要小于等于某个指定的目标预值。H(block header)≤target。block header 指块头，块头里有很多域，其中一个域是我们可以设置的随机数nonce，挖矿的过程是不停的试随机数，使得block header取哈希后落在指定的范围之内。</p>
+<p><strong>puzzle friendly</strong>是指挖矿过程中没有捷径，为了使输出值落在指定范围，只能一个一个去试。所以这个过程还可以作为工作量证明(proof of work)。<br>挖矿很难，验证很容易。(difficult to solve ,but easy to verify)</p>
+<p>比特币中用的哈希函数叫作<strong>SHA-256(secure hash algorithm )</strong> 以上三个性质它都是满足的。</p>
+<h4 id="2-在比特币系统中开账户"><a href="#2-在比特币系统中开账户" class="headerlink" title="2.在比特币系统中开账户:"></a>2.在比特币系统中开账户:</h4><p>在本地创立一个公私钥匙对(public key ,private key)，这就是一个账户。公私钥匙对是来自于非对称的加密技术(asymmetric encryption algorithm)。</p>
+<p>两人之间信息的交流可以利用密钥(encryption key)，A将信息加密后发给B，B收到后用密钥解密，因为加密和解密用的是同一个密钥，所以叫对称加密。前提是有渠道可以安全地把密钥分发给通讯的双方。因此对称加密的缺点就是密钥的分发不方便，因为在网络上很容易被窃听。非对称密钥是用一对密钥而不是一个，加密用公钥，解密用私钥，加密和解密用的都是接收方的公钥和私钥。公钥是不用保密的，私钥要保密但是私钥只要保存在本地就行，不用传给对方。公钥相当于银行账号，别人转账只要知道公钥就行，私钥相当于账户密码，知道私钥可以把账户上钱转走。公钥和私钥是用来签名。</p>
+<p>假如A想向B转10个比特币，A把交易放在区块链上，别人怎么知道这笔交易是A发起的呢?这就需要A要用自己的私钥给交易签名，其他人收到这笔交易后，要用A的公钥去验证签名。签名用私钥，验证用公钥，用的仍然是同一个人的。创建账户产生相同公私钥的可能性微乎其微，所以大量创建账户来窃取其他人账户是不可行的。</p>
+<p>我们假设产生公私钥时有一个好的随机源(a good source of randomness)，产生公私钥是随机的，如果随机源不好，就有可能产生相同的公私钥。比特币中用的签名算法，不仅是生成公私钥的时候要有好的随机源，之后每一次签名时也要有好的随机源。只要有一次签名用的随机源不好的话，就有可能泄露私钥。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
